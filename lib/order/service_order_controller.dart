@@ -22,30 +22,7 @@ class ServiceOrderController {
   Stream<List<ServiceOrder>> getOrdersStream() {
     return Rx.combineLatest2<List<ServiceOrder>, ServiceOrderSortingOption,
             List<ServiceOrder>>(_serviceOrderRepository.getOrdersStream(),
-        _sortingOptionsSubject.stream, (orders, sortingOption) {
-      switch (sortingOption) {
-        case ServiceOrderSortingOption.tableNumber:
-          orders.sort((a, b) => a.tableNumber.compareTo(b.tableNumber));
-          break;
-        case ServiceOrderSortingOption.waiterName:
-          orders.sort((a, b) => a.waiterName.compareTo(b.waiterName));
-          break;
-        default:
-          orders.sort((a, b) => b.time.compareTo(a.time)); // Orden descendente
-      }
-      return orders;
-    });
-  }
-
-  ServiceOrderSortingOption get currentSortingOption =>
-      _sortingOptionsSubject.value;
-
-  set currentSortingOption(ServiceOrderSortingOption value) {
-    _sortingOptionsSubject.add(value);
-  }
-
-  Future<void> createOrder(ServiceOrder order) async {
-    await _serviceOrderRepository.createOrder(order);
+        _sortingOptionsSubject.stream, _sortOrders);
   }
 
   List<ServiceOrder> _sortOrders(
@@ -63,6 +40,10 @@ class ServiceOrderController {
         sortedOrders.sort((a, b) => b.time.compareTo(a.time));
     }
     return sortedOrders;
+  }
+
+  Future<void> createOrder(ServiceOrder order) async {
+    await _serviceOrderRepository.createOrder(order);
   }
 
   void dispose() {

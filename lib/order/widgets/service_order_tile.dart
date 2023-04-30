@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import '../order_model.dart';
+import '../serrvice_order_model.dart';
 
-class OrderTile extends StatelessWidget {
-  final OrderModel order;
+class ServiceOrderTile extends StatelessWidget {
+  final ServiceOrder order;
 
-  const OrderTile({super.key, required this.order});
+  const ServiceOrderTile({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {
@@ -21,11 +21,11 @@ class OrderTile extends StatelessWidget {
             Text('Mesero: ${order.waiterName}',
                 style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 4),
-            Text('Hora: ${order.startTime.hour}:${order.startTime.minute}',
+            Text('Hora: ${order.time.hour}:${order.time.minute}',
                 style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 4),
             Text(
-                'Tiempo transcurrido: ${DateTime.now().difference(order.startTime).inMinutes} minutos',
+                'Tiempo transcurrido: ${DateTime.now().difference(order.time).inMinutes} minutos',
                 style: const TextStyle(fontSize: 16)),
             const SizedBox(height: 4),
             Text('Comensales: ${order.numberOfGuests}',

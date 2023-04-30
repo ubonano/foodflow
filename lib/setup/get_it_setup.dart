@@ -1,14 +1,15 @@
 import 'package:get_it/get_it.dart';
-import '../order/order_repository.dart';
-import '../order/order_service.dart';
+import '../order/service_order_controller.dart';
+import '../order/service_order_repository.dart';
 
 GetIt getIt = GetIt.instance;
 
 void setupGetIt() {
-  getIt.registerLazySingleton<OrderRepository>(() => OrderRepository());
-  getIt.registerLazySingleton<OrderService>(
-    () => OrderService(
-      repository: getIt<OrderRepository>(),
+  getIt.registerLazySingleton<ServiceOrderRepository>(
+      () => ServiceOrderRepository());
+  getIt.registerLazySingleton<ServiceOrderController>(
+    () => ServiceOrderController(
+      orderRepository: getIt<ServiceOrderRepository>(),
     ),
   );
 }

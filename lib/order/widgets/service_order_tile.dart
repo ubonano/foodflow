@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../serrvice_order_model.dart';
+import '../service_order_model.dart';
 
 class ServiceOrderTile extends StatelessWidget {
   final ServiceOrder order;

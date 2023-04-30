@@ -15,8 +15,6 @@ class FoodFlowHomePage extends StatefulWidget {
 class _FoodFlowHomePageState extends State<FoodFlowHomePage> {
   final _orderController = getIt<ServiceOrderController>();
 
-  ServiceOrderSortingOption _sortingOption = ServiceOrderSortingOption.time;
-
   @override
   void initState() {
     super.initState();
@@ -29,11 +27,7 @@ class _FoodFlowHomePageState extends State<FoodFlowHomePage> {
         title: const Text('ServiceFlow - Órdenes abiertas'),
         actions: [
           PopupMenuButton<ServiceOrderSortingOption>(
-            onSelected: (value) {
-              setState(() {
-                _sortingOption = value;
-              });
-            },
+            onSelected: (value) => _orderController.updateSortingOption(value),
             itemBuilder: (BuildContext context) {
               return [
                 const PopupMenuItem<ServiceOrderSortingOption>(
@@ -59,7 +53,7 @@ class _FoodFlowHomePageState extends State<FoodFlowHomePage> {
         child: const Icon(Icons.add),
       ),
       body: AppStreamBuilder<List<ServiceOrder>>(
-        stream: _orderController.getOrdersStream(sortingOption: _sortingOption),
+        stream: _orderController.getOrdersStream(),
         onData: (orders) {
           return GridView.builder(
             itemCount: orders.length,

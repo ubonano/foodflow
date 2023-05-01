@@ -14,7 +14,6 @@ class OrderDashboardScreen extends StatefulWidget {
 
   @override
   _OrderDashboardScreenState createState() {
-    _logger.info('OrderDashboardScreen created');
     return _OrderDashboardScreenState();
   }
 }
@@ -28,7 +27,7 @@ class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('ServiceFlow - Órdenes abiertas'),
+        title: const Text('Órdenes abiertas'),
         actions: [_buildSortingPopup()],
       ),
       floatingActionButton: FloatingActionButton(
@@ -69,6 +68,8 @@ class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
   }
 
   Widget _buildOrderGrid(List<ServiceOrder> orders) {
+    _logger.info('Building Order grid');
+
     return GridView.builder(
       itemCount: orders.length,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

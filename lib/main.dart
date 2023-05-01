@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'setup/firebase_options.dart';
 import 'setup/get_it_setup.dart';
 import 'utils/firestore_utils.dart';
-import 'pages/food_flow_home_page.dart';
+import 'order/order_dashboard_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -23,12 +23,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Food Flow',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Colors.purple,
       ),
-      home: const FoodFlowHomePage(),
+      home: const OrderDashboardScreen(),
     );
   }
 }

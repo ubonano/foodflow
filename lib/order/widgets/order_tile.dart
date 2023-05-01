@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import '../service_order_model.dart';
 
-class ServiceOrderTile extends StatelessWidget {
+class OrderTile extends StatelessWidget {
   final ServiceOrder order;
 
-  const ServiceOrderTile({super.key, required this.order});
+  const OrderTile({super.key, required this.order});
 
   @override
   Widget build(BuildContext context) {

@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import '../order/service_order_model.dart';
+import '../order/order_model.dart';
 
 void createServiceOrders() async {
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;

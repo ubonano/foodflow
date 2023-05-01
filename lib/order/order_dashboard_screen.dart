@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:foodflow/setup/get_it_setup.dart';
 import 'package:intl/intl.dart';
-import '../order/service_order_controller.dart';
-import '../order/service_order_model.dart';
+import 'order_controller.dart';
+import 'order_model.dart';
 import '../widgets/app_stream_builder.dart';
 
-class FoodFlowHomePage extends StatefulWidget {
-  const FoodFlowHomePage({super.key});
+class OrderDashboardScreen extends StatefulWidget {
+  const OrderDashboardScreen({super.key});
 
   @override
-  _FoodFlowHomePageState createState() => _FoodFlowHomePageState();
+  _OrderDashboardScreenState createState() => _OrderDashboardScreenState();
 }
 
-class _FoodFlowHomePageState extends State<FoodFlowHomePage> {
+class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
   final _orderController = getIt<ServiceOrderController>();
 
   @override
@@ -26,20 +26,20 @@ class _FoodFlowHomePageState extends State<FoodFlowHomePage> {
       appBar: AppBar(
         title: const Text('ServiceFlow - Órdenes abiertas'),
         actions: [
-          PopupMenuButton<ServiceOrderSortingOption>(
+          PopupMenuButton<OrderSortingOption>(
             onSelected: (value) => _orderController.updateSortingOption(value),
             itemBuilder: (BuildContext context) {
               return [
-                const PopupMenuItem<ServiceOrderSortingOption>(
-                  value: ServiceOrderSortingOption.time,
+                const PopupMenuItem<OrderSortingOption>(
+                  value: OrderSortingOption.time,
                   child: Text('Ordenar por hora de llegada'),
                 ),
-                const PopupMenuItem<ServiceOrderSortingOption>(
-                  value: ServiceOrderSortingOption.tableNumber,
+                const PopupMenuItem<OrderSortingOption>(
+                  value: OrderSortingOption.tableNumber,
                   child: Text('Ordenar por número de mesa'),
                 ),
-                const PopupMenuItem<ServiceOrderSortingOption>(
-                  value: ServiceOrderSortingOption.waiterName,
+                const PopupMenuItem<OrderSortingOption>(
+                  value: OrderSortingOption.waiterName,
                   child: Text('Ordenar por mesero'),
                 ),
               ];

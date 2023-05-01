@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:logging/logging.dart';
-import 'service_order_model.dart';
+import 'order_model.dart';
 
-class ServiceOrderRepository {
+class OrderRepository {
   final FirebaseFirestore _firestore;
   final Logger _logger;
   final String _collectionName = 'serviceOrders';
 
-  ServiceOrderRepository(
+  OrderRepository(
       {required FirebaseFirestore firestore, required Logger logger})
       : _firestore = firestore,
         _logger = logger;

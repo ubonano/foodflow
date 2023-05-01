@@ -1,16 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:foodflow/setup/get_it_setup.dart';
+import 'package:logging/logging.dart';
 import 'order_controller.dart';
 import 'order_model.dart';
 import '../widgets/app_stream_builder.dart';
 import 'widgets/order_tile.dart';
 import 'widgets/order_creation_dialog.dart';
 
+final _logger = Logger('OrderDashboardScreen');
+
 class OrderDashboardScreen extends StatefulWidget {
-  const OrderDashboardScreen({super.key});
+  const OrderDashboardScreen({Key? key}) : super(key: key);
 
   @override
-  _OrderDashboardScreenState createState() => _OrderDashboardScreenState();
+  _OrderDashboardScreenState createState() {
+    _logger.info('OrderDashboardScreen created');
+    return _OrderDashboardScreenState();
+  }
 }
 
 class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
@@ -18,6 +24,8 @@ class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
 
   @override
   Widget build(BuildContext context) {
+    _logger.info('Building OrderDashboardScreen');
+
     return Scaffold(
       appBar: AppBar(
         title: const Text('ServiceFlow - Órdenes abiertas'),
@@ -37,7 +45,10 @@ class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
 
   Widget _buildSortingPopup() {
     return PopupMenuButton<OrderSortingOption>(
-      onSelected: (value) => _orderController.updateSortingOption(value),
+      onSelected: (value) {
+        _logger.info('Selected sorting option: $value');
+        _orderController.updateSortingOption(value);
+      },
       itemBuilder: (BuildContext context) {
         return [
           const PopupMenuItem<OrderSortingOption>(
@@ -81,6 +92,7 @@ class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
       },
     );
     if (newOrder != null) {
+      _logger.info('Creating new order: ${newOrder.toMap()}');
       await _orderController.createOrder(newOrder);
     }
   }

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../../widgets/app_form_fields.dart';
 import '../order_model.dart';
 
 class OrderCreationDialog extends StatefulWidget {
@@ -9,9 +10,19 @@ class OrderCreationDialog extends StatefulWidget {
 }
 
 class _OrderCreationDialogState extends State<OrderCreationDialog> {
-  int? tableNumber;
-  String? waiterName;
-  int? numberOfGuests;
+  final _formKey = GlobalKey<FormState>();
+
+  final _tableNumberController = TextEditingController();
+  final _waiterNameController = TextEditingController();
+  final _numberOfGuestsController = TextEditingController();
+
+  @override
+  void dispose() {
+    _tableNumberController.dispose();
+    _waiterNameController.dispose();
+    _numberOfGuestsController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,31 +31,15 @@ class _OrderCreationDialogState extends State<OrderCreationDialog> {
       content: SingleChildScrollView(
         child: ListBody(
           children: <Widget>[
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Número de mesa',
+            Form(
+              key: _formKey,
+              child: Column(
+                children: [
+                  AppFormFields.tableNumber(_tableNumberController),
+                  AppFormFields.waiterName(_waiterNameController),
+                  AppFormFields.numberOfGuests(_numberOfGuestsController),
+                ],
               ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                tableNumber = int.tryParse(value);
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Nombre del mesero',
-              ),
-              onChanged: (value) {
-                waiterName = value;
-              },
-            ),
-            TextField(
-              decoration: const InputDecoration(
-                labelText: 'Cantidad de comensales',
-              ),
-              keyboardType: TextInputType.number,
-              onChanged: (value) {
-                numberOfGuests = int.tryParse(value);
-              },
             ),
           ],
         ),
@@ -59,13 +54,11 @@ class _OrderCreationDialogState extends State<OrderCreationDialog> {
         TextButton(
           child: const Text('Crear'),
           onPressed: () {
-            if (tableNumber != null &&
-                waiterName != null &&
-                numberOfGuests != null) {
+            if (_formKey.currentState!.validate()) {
               final newOrder = ServiceOrder.createNew(
-                tableNumber: tableNumber!,
-                waiterName: waiterName!,
-                numberOfGuests: numberOfGuests!,
+                tableNumber: int.parse(_tableNumberController.text),
+                waiterName: _waiterNameController.text,
+                numberOfGuests: int.parse(_numberOfGuestsController.text),
               );
               Navigator.of(context).pop(newOrder);
             }

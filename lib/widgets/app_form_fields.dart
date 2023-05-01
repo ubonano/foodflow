@@ -11,7 +11,6 @@ class _AppTextField extends StatelessWidget {
   final void Function(String)? onFieldSubmitted;
 
   const _AppTextField({
-    super.key,
     required this.controller,
     required this.labelText,
     this.keyboardType,
@@ -194,6 +193,50 @@ class AppFormFields {
           onChanged: onChanged,
         ),
       ],
+    );
+  }
+
+  static Widget tableNumber(
+    TextEditingController controller, {
+    bool enabled = true,
+    void Function(String)? onFieldSubmitted,
+  }) {
+    return _AppTextField(
+      controller: controller,
+      onFieldSubmitted: onFieldSubmitted,
+      labelText: 'Número de mesa',
+      keyboardType: TextInputType.number,
+      validator: AppValidators.tableNumber,
+      enabled: enabled,
+    );
+  }
+
+  static Widget numberOfGuests(
+    TextEditingController controller, {
+    bool enabled = true,
+    void Function(String)? onFieldSubmitted,
+  }) {
+    return _AppTextField(
+      controller: controller,
+      onFieldSubmitted: onFieldSubmitted,
+      labelText: 'Cantidad de comensales',
+      keyboardType: TextInputType.number,
+      validator: AppValidators.numberOfGuests,
+      enabled: enabled,
+    );
+  }
+
+  static Widget waiterName(
+    TextEditingController controller, {
+    bool enabled = true,
+    void Function(String)? onFieldSubmitted,
+  }) {
+    return _AppTextField(
+      controller: controller,
+      onFieldSubmitted: onFieldSubmitted,
+      labelText: 'Nombre del mesero',
+      validator: AppValidators.waiterName,
+      enabled: enabled,
     );
   }
 }

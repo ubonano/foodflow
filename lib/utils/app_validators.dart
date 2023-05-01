@@ -98,6 +98,31 @@ class AppValidators {
     return null;
   }
 
+  static String? tableNumber(String? value, {bool required = true}) {
+    if (_isEmptyOrNull(value, required)) {
+      return 'Por favor, ingrese un número de mesa';
+    } else if (value != null && int.tryParse(value) == null) {
+      return 'Por favor, ingrese un número de mesa válido';
+    }
+    return null;
+  }
+
+  static String? numberOfGuests(String? value, {bool required = true}) {
+    if (_isEmptyOrNull(value, required)) {
+      return 'Por favor, ingrese la cantidad de comensales';
+    } else if (value != null && int.tryParse(value) == null) {
+      return 'Por favor, ingrese una cantidad válida de comensales';
+    }
+    return null;
+  }
+
+  static String? waiterName(String? value, {bool required = true}) {
+    if (_isEmptyOrNull(value, required)) {
+      return 'Por favor, ingrese el nombre del mesero';
+    }
+    return null;
+  }
+
   static bool _isEmptyOrNull(String? value, bool required) {
     return required && (value == null || value.isEmpty);
   }

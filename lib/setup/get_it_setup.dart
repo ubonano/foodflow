@@ -15,8 +15,8 @@ void setupGetIt() {
       logger: Logger('ServiceOrderRepository'),
     ),
   );
-  getIt.registerLazySingleton<ServiceOrderController>(
-    () => ServiceOrderController(
+  getIt.registerLazySingleton<OrderController>(
+    () => OrderController(
       orderRepository: getIt<OrderRepository>(),
     ),
   );

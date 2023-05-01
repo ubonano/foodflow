@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:foodflow/setup/get_it_setup.dart';
 import '../../../widgets/app_form_fields.dart';
 import '../../order_model.dart';
+import '../../order_controller.dart';
 
 class OrderCreationDialog extends StatefulWidget {
   const OrderCreationDialog({Key? key}) : super(key: key);
@@ -11,6 +13,7 @@ class OrderCreationDialog extends StatefulWidget {
 
 class _OrderCreationDialogState extends State<OrderCreationDialog> {
   final _formKey = GlobalKey<FormState>();
+  final _orderController = getIt<OrderController>();
 
   final _tableNumberController = TextEditingController();
   final _waiterNameController = TextEditingController();
@@ -53,14 +56,28 @@ class _OrderCreationDialogState extends State<OrderCreationDialog> {
         ),
         TextButton(
           child: const Text('Crear'),
-          onPressed: () {
+          onPressed: () async {
             if (_formKey.currentState!.validate()) {
-              final newOrder = ServiceOrder.createNew(
-                tableNumber: int.parse(_tableNumberController.text),
-                waiterName: _waiterNameController.text,
-                numberOfGuests: int.parse(_numberOfGuestsController.text),
-              );
-              Navigator.of(context).pop(newOrder);
+              int tableNumber = int.parse(_tableNumberController.text);
+
+              bool isTableTaken =
+                  await _orderController.isTableNumberTaken(tableNumber);
+
+              if (isTableTaken) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    content:
+                        Text('La mesa número $tableNumber ya tiene una orden.'),
+                  ),
+                );
+              } else {
+                final newOrder = ServiceOrder.createNew(
+                  tableNumber: tableNumber,
+                  waiterName: _waiterNameController.text,
+                  numberOfGuests: int.parse(_numberOfGuestsController.text),
+                );
+                Navigator.of(context).pop();
+              }
             }
           },
         ),

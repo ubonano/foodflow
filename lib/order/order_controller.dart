@@ -6,13 +6,13 @@ import 'order_repository.dart';
 
 enum OrderSortingOption { time, tableNumber, waiterName }
 
-class ServiceOrderController {
-  final OrderRepository _serviceOrderRepository;
+class OrderController {
+  final OrderRepository _orderRepository;
   final BehaviorSubject<OrderSortingOption> _sortingOptionsSubject;
   final Logger _logger = Logger('ServiceOrderController');
 
-  ServiceOrderController({required orderRepository})
-      : _serviceOrderRepository = orderRepository,
+  OrderController({required orderRepository})
+      : _orderRepository = orderRepository,
         _sortingOptionsSubject = BehaviorSubject<OrderSortingOption>.seeded(
             OrderSortingOption.time) {
     _logger.info('ServiceOrderController created.');
@@ -26,7 +26,7 @@ class ServiceOrderController {
   Stream<List<ServiceOrder>> getOrdersStream() {
     _logger.info('Fetching orders stream.');
     return Rx.combineLatest2<List<ServiceOrder>, OrderSortingOption,
-            List<ServiceOrder>>(_serviceOrderRepository.getOrdersStream(),
+            List<ServiceOrder>>(_orderRepository.getOrdersStream(),
         _sortingOptionsSubject.stream, _sortOrders);
   }
 
@@ -50,12 +50,12 @@ class ServiceOrderController {
 
   Future<void> createOrder(ServiceOrder order) async {
     _logger.info('Creating new order: ${order.toMap()}');
-    await _serviceOrderRepository.createOrder(order);
+    await _orderRepository.createOrder(order);
   }
 
   Future<bool> isTableNumberTaken(int tableNumber) async {
     _logger.info('Checking if table number $tableNumber is taken.');
-    return await _serviceOrderRepository.isTableNumberTaken(tableNumber);
+    return await _orderRepository.isTableNumberTaken(tableNumber);
   }
 
   void dispose() {

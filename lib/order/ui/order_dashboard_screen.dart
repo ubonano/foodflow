@@ -19,7 +19,7 @@ class OrderDashboardScreen extends StatefulWidget {
 }
 
 class _OrderDashboardScreenState extends State<OrderDashboardScreen> {
-  final _orderController = getIt<ServiceOrderController>();
+  final _orderController = getIt<OrderController>();
 
   @override
   Widget build(BuildContext context) {

@@ -17,10 +17,10 @@ class OrderRepository {
     return _firestore
         .collection(_collectionName)
         .snapshots()
-        .map(_snapshotToServiceOrderList);
+        .map(_snapshotToOrderList);
   }
 
-  List<ServiceOrder> _snapshotToServiceOrderList(QuerySnapshot snapshot) {
+  List<ServiceOrder> _snapshotToOrderList(QuerySnapshot snapshot) {
     _logger.info('Converting snapshot to order list.');
     return snapshot.docs
         .map((doc) => ServiceOrder.fromDocumentSnapshot(doc))

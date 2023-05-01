@@ -5,7 +5,7 @@ import 'order_model.dart';
 class OrderRepository {
   final FirebaseFirestore _firestore;
   final Logger _logger;
-  final String _collectionName = 'serviceOrders';
+  final String _collectionName = 'orders';
 
   OrderRepository(
       {required FirebaseFirestore firestore, required Logger logger})

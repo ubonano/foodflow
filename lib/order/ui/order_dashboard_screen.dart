@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:foodflow/setup/get_it_setup.dart';
 import 'package:logging/logging.dart';
-import 'order_controller.dart';
-import 'order_model.dart';
-import '../widgets/app_stream_builder.dart';
-import 'widgets/order_tile.dart';
+import '../order_controller.dart';
+import '../order_model.dart';
+import '../../widgets/app_stream_builder.dart';
 import 'widgets/order_creation_dialog.dart';
+import 'widgets/order_tile.dart';
 
 final _logger = Logger('OrderDashboardScreen');
 

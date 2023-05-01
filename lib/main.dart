@@ -4,7 +4,7 @@ import 'setup/firebase_options.dart';
 import 'setup/get_it_setup.dart';
 import 'setup/logger_setup.dart';
 import 'utils/firestore_utils.dart';
-import 'order/order_dashboard_screen.dart';
+import 'order/ui/order_dashboard_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

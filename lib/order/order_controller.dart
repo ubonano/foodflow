@@ -13,9 +13,8 @@ class ServiceOrderController {
 
   ServiceOrderController({required orderRepository})
       : _serviceOrderRepository = orderRepository,
-        _sortingOptionsSubject =
-            BehaviorSubject<OrderSortingOption>.seeded(
-                OrderSortingOption.time) {
+        _sortingOptionsSubject = BehaviorSubject<OrderSortingOption>.seeded(
+            OrderSortingOption.time) {
     _logger.info('ServiceOrderController created.');
   }
 
@@ -52,6 +51,11 @@ class ServiceOrderController {
   Future<void> createOrder(ServiceOrder order) async {
     _logger.info('Creating new order: ${order.toMap()}');
     await _serviceOrderRepository.createOrder(order);
+  }
+
+  Future<bool> isTableNumberTaken(int tableNumber) async {
+    _logger.info('Checking if table number $tableNumber is taken.');
+    return await _serviceOrderRepository.isTableNumberTaken(tableNumber);
   }
 
   void dispose() {

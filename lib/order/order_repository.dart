@@ -20,13 +20,6 @@ class OrderRepository {
         .map(_snapshotToOrderList);
   }
 
-  List<ServiceOrder> _snapshotToOrderList(QuerySnapshot snapshot) {
-    _logger.info('Converting snapshot to order list.');
-    return snapshot.docs
-        .map((doc) => ServiceOrder.fromDocumentSnapshot(doc))
-        .toList();
-  }
-
   Future<void> createOrder(ServiceOrder order) async {
     _logger.info('Creating new order: ${order.toMap()}');
     try {
@@ -35,5 +28,27 @@ class OrderRepository {
       _logger.severe('Error creating the order: $e');
       throw e;
     }
+  }
+
+  Future<bool> isTableNumberTaken(int tableNumber) async {
+    _logger.info('Checking if table number $tableNumber is taken.');
+    try {
+      final snapshot = await _firestore
+          .collection(_collectionName)
+          .where('tableNumber', isEqualTo: tableNumber)
+          .get();
+
+      return snapshot.docs.isNotEmpty;
+    } catch (e) {
+      _logger.severe('Error checking if table number is taken: $e');
+      throw e;
+    }
+  }
+
+  List<ServiceOrder> _snapshotToOrderList(QuerySnapshot snapshot) {
+    _logger.info('Converting snapshot to order list.');
+    return snapshot.docs
+        .map((doc) => ServiceOrder.fromDocumentSnapshot(doc))
+        .toList();
   }
 }

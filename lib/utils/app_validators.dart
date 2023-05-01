@@ -98,12 +98,16 @@ class AppValidators {
     return null;
   }
 
-  static String? tableNumber(String? value, {bool required = true}) {
+  static String? tableNumber(
+    String? value, {
+    bool required = true,
+  }) {
     if (_isEmptyOrNull(value, required)) {
       return 'Por favor, ingrese un número de mesa';
     } else if (value != null && int.tryParse(value) == null) {
       return 'Por favor, ingrese un número de mesa válido';
     }
+
     return null;
   }
 

@@ -1,9 +1,11 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:foodflow/setup/get_it_setup.dart';
 import 'package:logging/logging.dart';
 import '../../controllers/table_controller.dart';
 import '../../models/table.dart';
 
+@RoutePage()
 class TableEditScreen extends StatefulWidget {
   final TableModel? table;
 

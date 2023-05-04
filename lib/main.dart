@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'setup/firebase_options.dart';
 import 'setup/get_it_setup.dart';
 import 'setup/logger_setup.dart';
+import 'setup/router.dart';
 import 'ui/screens/table_list_screen.dart';
 
 Future<void> main() async {
@@ -13,21 +14,24 @@ Future<void> main() async {
   setupLogger();
   setupGetIt();
 
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  MyApp({super.key});
+
+  final _appRouter = AppRouter();
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return MaterialApp.router(
       title: 'Food Flow',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const TableListScreen(),
+      routerConfig: _appRouter.config(),
+      // home: const TableListScreen(),
     );
   }
 }

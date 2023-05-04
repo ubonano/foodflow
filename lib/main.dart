@@ -3,8 +3,7 @@ import 'package:flutter/material.dart';
 import 'setup/firebase_options.dart';
 import 'setup/get_it_setup.dart';
 import 'setup/logger_setup.dart';
-import 'utils/firestore_utils.dart';
-import 'order/ui/order_dashboard_screen.dart';
+import 'ui/screens/table_list_screen.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -13,8 +12,6 @@ Future<void> main() async {
 
   setupLogger();
   setupGetIt();
-
-  // createServiceOrders();
 
   runApp(const MyApp());
 }
@@ -30,7 +27,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.purple,
       ),
-      home: const OrderDashboardScreen(),
+      home: const TableListScreen(),
     );
   }
 }

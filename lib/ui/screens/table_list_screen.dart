@@ -1,7 +1,6 @@
 import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
 import 'package:foodflow/setup/router.gr.dart';
-
 import '../../controllers/table_controller.dart';
 import '../../models/table.dart';
 import '../../setup/get_it_setup.dart';
@@ -44,8 +43,9 @@ class _TableListScreenState extends State<TableListScreen> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     IconButton(
-                        icon: const Icon(Icons.edit),
-                        onPressed: () => router.push(TableEditRoute())),
+                      icon: const Icon(Icons.edit),
+                      onPressed: () => router.push(TableEditRoute()),
+                    ),
                     IconButton(
                       icon: const Icon(Icons.delete),
                       onPressed: () async {

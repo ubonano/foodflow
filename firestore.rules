@@ -9,5 +9,9 @@ service cloud.firestore {
                    && request.resource.data.identifier.size() > 0;
     }
 
+    match /orders/{docId} {
+      allow read, delete, write: if true;
+    }
+
   }
 }
